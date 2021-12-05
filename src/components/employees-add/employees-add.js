@@ -1,21 +1,21 @@
 import React from 'react'
 import './employees-add.scss'
 
-const EmployeesAdd = () => {
+const EmployeesAdd = ({addNewEmploye}) => {
     return (
         <div className="app-add-form">
             <h3>Добавте нового співробітника:</h3>
             <form
                 className="add-form d-flex">
                 <input type="text"
-                       className="form-control new-post-label"
+                       className="form-control new-post-label name-new-employee"
                        placeholder="Як його звати?" />
                 <input type="number"
-                       className="form-control new-post-label"
+                       className="form-control new-post-label salary-new-employee"
                        placeholder="З/П в $?" />
 
-                <button type="submit"
-                        className="btn btn-outline-light">Додати</button>
+                <button type="button"
+                        className="btn btn-outline-light" onClick={() => addNewEmploye()}>Додати</button>
             </form>
         </div>
     )

@@ -1,28 +1,31 @@
 import React from 'react'
 import './employess-list-item.scss'
 
-const EmployeesListItem = ({name, salary, premials, changePremials}) => {
+const EmployeesListItem = ({id, name, salary, premials, increase, changePremials, increasePerson, deletePerson}) => {
 
     let className = "list-group-item d-flex justify-content-between";
     if (premials) {
         className = className + ' increase';
     }
+    if (increase) {
+        className = className + ' like';
+    }
 
     return (
         <li className={className}>
-            <span className='list-group-item-label'>{name}</span>
+            <span onClick={() => increasePerson(id)} className='list-group-item-label'>{name}</span>
             <input type="text" className='list-group-item-input' defaultValue={salary + '$'}/>
             <div className='d-flex justify-content-center align-items-center'>
-                <button onClick={() => changePremials(name)} type="button"
+                <button onClick={() => changePremials(id)} type="button"
                         className="btn-cookie btn-sm ">
                     <i className="fas fa-cookie"></i>
                 </button>
 
-                <button type="button"
+                <button onClick={() => deletePerson(id)} type="button"
                         className="btn-trash btn-sm ">
                     <i className="fas fa-trash"></i>
                 </button>
-                <i className="fas fa-star"></i>
+                <i onClick={() => increasePerson(id)} className="fas fa-star"></i>
             </div>
         </li>
     )
