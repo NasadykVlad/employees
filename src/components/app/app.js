@@ -11,12 +11,11 @@ function App() {
 
     const [data, changeData] = React.useState(
         [
-            {id: uuid(), name:"Ткачук С.", salary: 800, premials: false, increase: false},
-            {id: uuid(), name:"Скірчук В.", salary: 1200, premials: false, increase: false},
+            {id: uuid(), name:"Ткачук С.", salary: 800, premials: false, increase: true},
+            {id: uuid(), name:"Скірчук В.", salary: 1200, premials: true, increase: true},
             {id: uuid(), name:"Раков О.", salary: 900, premials: false, increase: false}
         ]
     )
-
 
     function changePremials(id) {
        changeData(data.map(employe => {
@@ -52,7 +51,7 @@ function App() {
 
     return (
         <div className = "App">
-            <AppInfo />
+            <AppInfo data={data}/>
 
             <div className="search-panel">
                 <SearchPanel />
