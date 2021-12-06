@@ -11,3 +11,10 @@
     font-size: 18px
   }
 }
+
+
+@media (min-width: 320px) and (max-width: 1000px) {
+  .AppInfo {
+    margin: 3%
+  }
+}

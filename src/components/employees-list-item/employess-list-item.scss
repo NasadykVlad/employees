@@ -60,3 +60,36 @@
 .list-group-item.increase .btn-star {
   color: #aeaeae;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .list-group-item {
+    flex-wrap: wrap;
+    & span {
+      min-width: fit-content;
+      margin: 0 auto;
+    }
+    & input {
+      width: 100%;
+      border: 1px solid #e8e8e8;
+      margin: 3% auto;
+    }
+    & .justify-content-center {
+      justify-content: flex-start;
+    }
+  }
+}
+
+@media (min-width: 320px) and (max-width: 1000px) {
+  .list-group-item {
+    & span {
+      min-width: fit-content;
+      margin: 0 auto;
+    }
+    & input {
+      width: 100%;
+    }
+    & .justify-content-center {
+      justify-content: flex-start;
+    }
+  }
+}
