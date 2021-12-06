@@ -18,7 +18,7 @@
   }
 }
 
-@media (min-width: 320px) and (max-width: 1000px) {
+@media (min-width: 320px) and (max-width: 480px) {
   .app-add-form {
     margin: 3%;
     & .add-form {
@@ -27,10 +27,25 @@
       flex-wrap: wrap;
       & input {
         width: 100%;
-        margin: auto;
+        margin: 0 auto;
         &:nth-child(2) {
-          margin: 5% 0;
+          margin: 10px 0;
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 481px) and (max-width: 1000px) {
+  .app-add-form {
+    margin: 3%;
+    & .add-form {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      & input {
+        font-size: 14px;
+        max-width: 32%
       }
     }
   }
