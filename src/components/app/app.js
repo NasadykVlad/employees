@@ -16,6 +16,7 @@ function App() {
             {id: uuid(), name:"Раков О.", salary: 900, premials: false, increase: false}
         ]
     )
+    let [term, changeTerm] = React.useState('');
 
     function changePremials(id) {
        changeData(data.map(employe => {
@@ -49,14 +50,30 @@ function App() {
         }
     }
 
+    const searchEmployee = (items, term) => {
+        if (term.length === 0) {
+            return items
+        }
+
+        return items.filter(item => {
+            return item.name.indexOf(term) > -1
+        })
+    }
+
+    function addTerm() {
+        changeTerm(term = document.querySelector('.searchEmployee').value)
+    }
+
+    const visibleData = searchEmployee(data, term)
+
     return (
         <div className = "App">
-            <AppInfo data={data}/>
+            <AppInfo data={visibleData}/>
 
             <div className="search-panel">
-                <SearchPanel />
+                <SearchPanel addTerm={addTerm}/>
                 <AppFilter />
-                <EmployeesList data={data} changePremials={changePremials} increasePerson={increasePerson} deletePerson={deletePerson}/>
+                <EmployeesList data={visibleData} changePremials={changePremials} increasePerson={increasePerson} deletePerson={deletePerson}/>
             </div>
             <EmployeesAdd addNewEmploye={addNewEmploye} />
         </div>
