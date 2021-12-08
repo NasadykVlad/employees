@@ -13,10 +13,13 @@ function App() {
         [
             {id: uuid(), name:"Ткачук С.", salary: 800, premials: false, increase: true},
             {id: uuid(), name:"Скірчук В.", salary: 1200, premials: true, increase: true},
-            {id: uuid(), name:"Раков О.", salary: 900, premials: false, increase: false}
+            {id: uuid(), name:"Раков О.", salary: 1300, premials: false, increase: false}
         ]
     )
     let [term, changeTerm] = React.useState('');
+
+    let [filter, changeFilter] = React.useState('default');
+
 
     function changePremials(id) {
        changeData(data.map(employe => {
@@ -36,7 +39,7 @@ function App() {
         changeData(data.filter(item => item.id !== id))
     }
 
-    function addNewEmploye() {
+    function addNewEmployee() {
         const nameNewEmploye = document.querySelector('.name-new-employee').value
         const salaryNewEmploye = document.querySelector('.salary-new-employee').value
 
@@ -60,11 +63,34 @@ function App() {
         })
     }
 
+    const filterPost = (items, filter) => {
+        switch(filter) {
+            case 'improve':
+                return items.filter(item => item.increase === true)
+            case 'rich':
+                return items.filter(item => item.salary >= 1000)
+            default:
+                return items
+        }
+    }
+
+    function changeFilterToImprove() {
+        changeFilter(filter = 'improve')
+    }
+
+    function changeFilterToRich() {
+        changeFilter(filter = 'rich')
+    }
+
+    function changeFilterToDefault() {
+        changeFilter(filter = '')
+    }
+
     function addTerm() {
         changeTerm(term = document.querySelector('.searchEmployee').value)
     }
 
-    const visibleData = searchEmployee(data, term)
+    const visibleData = filterPost(searchEmployee(data, term), filter);
 
     return (
         <div className = "App">
@@ -72,10 +98,10 @@ function App() {
 
             <div className="search-panel">
                 <SearchPanel addTerm={addTerm}/>
-                <AppFilter />
+                <AppFilter filter={filter} changeFilterToImprove={changeFilterToImprove} changeFilterToRich={changeFilterToRich} changeFilterToDefault={changeFilterToDefault}/>
                 <EmployeesList data={visibleData} changePremials={changePremials} increasePerson={increasePerson} deletePerson={deletePerson}/>
             </div>
-            <EmployeesAdd addNewEmploye={addNewEmploye} />
+            <EmployeesAdd addNewEmployee={addNewEmployee} />
         </div>
     );
 }

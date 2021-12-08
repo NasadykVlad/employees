@@ -1,7 +1,7 @@
 import React from 'react'
 import './employees-add.scss'
 
-const EmployeesAdd = ({addNewEmploye}) => {
+const EmployeesAdd = ({addNewEmployee}) => {
     return (
         <div className="app-add-form">
             <h3>Добавте нового співробітника:</h3>
@@ -15,7 +15,7 @@ const EmployeesAdd = ({addNewEmploye}) => {
                        placeholder="З/П в $?" />
 
                 <button type="button"
-                        className="btn btn-outline-light" onClick={() => addNewEmploye()}>Додати</button>
+                        className="btn btn-outline-light" onClick={() => addNewEmployee()}>Додати</button>
             </form>
         </div>
     )
