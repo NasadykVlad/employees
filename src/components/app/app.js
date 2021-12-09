@@ -11,14 +11,16 @@ function App() {
 
     const [data, changeData] = React.useState(
         [
-            {id: uuid(), name:"Ткачук С.", salary: 800, premials: false, increase: true},
-            {id: uuid(), name:"Скірчук В.", salary: 1200, premials: true, increase: true},
-            {id: uuid(), name:"Раков О.", salary: 1300, premials: false, increase: false}
+            {id: uuid(), name:"Ткачук С.", salary: '1400$', premials: false, increase: true},
+            {id: uuid(), name:"Скірчук В.", salary: '750$', premials: true, increase: true},
+            {id: uuid(), name:"Раков О.", salary: '800$', premials: false, increase: false}
         ]
     )
     let [term, changeTerm] = React.useState('');
 
     let [filter, changeFilter] = React.useState('default');
+
+    let [idForChangeSalary, changeId] = React.useState('');
 
 
     function changePremials(id) {
@@ -45,7 +47,7 @@ function App() {
 
         if (nameNewEmploye && salaryNewEmploye) {
             changeData(data.concat([
-                {id: uuid(), name: nameNewEmploye, salary: salaryNewEmploye, premials: false, increase: false}
+                {id: uuid(), name: nameNewEmploye, salary: salaryNewEmploye + '$', premials: false, increase: false}
             ]))
 
             document.querySelector('.name-new-employee').value = ''
@@ -68,7 +70,7 @@ function App() {
             case 'improve':
                 return items.filter(item => item.increase === true)
             case 'rich':
-                return items.filter(item => item.salary >= 1000)
+                return items.filter(item => parseInt(item.salary.replace(/$/g, '')) >= 1000)
             default:
                 return items
         }
@@ -90,6 +92,17 @@ function App() {
         changeTerm(term = document.querySelector('.searchEmployee').value)
     }
 
+    function getIdClickChangeSalary(id) {
+        changeId(idForChangeSalary = id)
+    }
+
+    function changeSalary(event) {
+        changeData(data.map(employe => {
+            if(employe.id === idForChangeSalary) employe.salary = event.target.value
+            return employe
+        }))
+    }
+
     const visibleData = filterPost(searchEmployee(data, term), filter);
 
     return (
@@ -99,7 +112,7 @@ function App() {
             <div className="search-panel">
                 <SearchPanel addTerm={addTerm}/>
                 <AppFilter filter={filter} changeFilterToImprove={changeFilterToImprove} changeFilterToRich={changeFilterToRich} changeFilterToDefault={changeFilterToDefault}/>
-                <EmployeesList data={visibleData} changePremials={changePremials} increasePerson={increasePerson} deletePerson={deletePerson}/>
+                <EmployeesList data={visibleData} changePremials={changePremials} increasePerson={increasePerson} deletePerson={deletePerson} changeSalary={changeSalary} getIdClickChangeSalary={getIdClickChangeSalary}/>
             </div>
             <EmployeesAdd addNewEmployee={addNewEmployee} />
         </div>

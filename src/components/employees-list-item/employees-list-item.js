@@ -1,7 +1,7 @@
 import React from 'react'
 import './employess-list-item.scss'
 
-const EmployeesListItem = ({id, name, salary, premials, increase, changePremials, increasePerson, deletePerson}) => {
+const EmployeesListItem = ({id, name, salary, premials, increase, changePremials, increasePerson, deletePerson, changeSalary, getIdClickChangeSalary}) => {
 
     let className = "list-group-item d-flex justify-content-between";
     if (premials) {
@@ -14,7 +14,7 @@ const EmployeesListItem = ({id, name, salary, premials, increase, changePremials
     return (
         <li className={className}>
             <span onClick={() => increasePerson(id)} className='list-group-item-label'>{name}</span>
-            <input type="text" className='list-group-item-input' defaultValue={salary + '$'}/>
+            <input type="text" className='list-group-item-input' value={salary} onClick={() => getIdClickChangeSalary(id)} onChange={changeSalary}/>
             <div className='d-flex justify-content-center align-items-center'>
                 <button onClick={() => changePremials(id)} type="button"
                         className="btn-cookie btn-sm ">
